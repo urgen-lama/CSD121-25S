@@ -1,0 +1,17 @@
+Main.java
+    In Main.java I created a program that will prompt user to enter their name and a number between 1 to 100.
+    The int randomNumber = ((int)(Math.random()*100)); function generates random numbers between 1 to 100.
+    If the user inputs the right answer then a message will show up and if the user did not input the right answer then
+        the program will tell them to try again.
+    User can exit from the program by providing numbers from -1 to below.
+    The result will be saved in Result.txt file.
+    (In this program I did not use Arrays and arguments)
+
+Main1.java
+    In Main1.java I created a program that will prompt user to input correct password to see the marks.
+        Password = 12345678
+    If the user did not provide correct password then the program will break with a message.
+    If the user provide correct password then the program will again ask him to provide student ID.
+        Student ID = 4444
+    After providing the student ID the user can see the marks.
+    (In this program I used Arrays and argument)
