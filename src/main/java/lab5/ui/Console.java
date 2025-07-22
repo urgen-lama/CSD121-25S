@@ -1,8 +1,8 @@
-package tictactoe.ui;
+package lab5.ui;
 
 import com.diogonunes.jcolor.AnsiFormat;
-import tictactoe.game.*;
-import tictactoe.players.*;
+import lab5.game.*;
+import lab5.players.*;
 
 import java.util.Scanner;
 
@@ -47,18 +47,20 @@ public class Console {
     public static Player promptForPlayer(PlayerToken whichPlayer) {
 
         while ( true ) {
-            var input = prompt(fPrompt.format("Who will play " + whichPlayer + "? "));
+
+            var input = prompt(fPrompt.format("Who will play " + whichPlayer + "? (Type name or @linus, @omola for Computer): "));
 
             if ( input.startsWith("@") ) {
-                input = input.substring(1).toLowerCase(); // remove the '@' prefix
+                input = input.substring(1).toLowerCase();
 
                 switch ( input ) {
-                    // E.g.
-                    // case "randy" -> { return new Randy(); }
-                    default -> printAlert("TODO: Implement computer players");
+                    case "linus" -> { return new Linus("Linus"); }
+                    case "omola" -> { return new Omola("Omola"); }
+
+                    default -> printAlert("Unknown computer player. Available: @linus, @circe.");
                 }
             } else {
-                return new Player(input);
+                return new HumanPlayer(input);
             }
         }
     }
