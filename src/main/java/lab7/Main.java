@@ -28,6 +28,28 @@ public class Main {
 
     // TODO: implement the searchRecipes method
 
+    /**
+     * The method finds the recipes according to the name or description and is case-insensitive
+     * @param dataService provides access to recipe data
+     * @param searchTerm for searching data
+     * @return list of matching recipes, or empty list if the recipes are not found
+     */
+    public static List<Recipe> searchRecipes(DataService dataService, String searchTerm) {
+        try {
+            var recipes = dataService.getRecipes(); //connects to the data and gets all the recipes from the data service
+            String lowerCaseSearchTerm = searchTerm.toLowerCase();
+
+            return recipes.stream()
+                    .filter(recipe -> recipe.name().toLowerCase().contains(lowerCaseSearchTerm) ||
+                            recipe.description().toLowerCase().contains(lowerCaseSearchTerm))
+                    .toList();
+        } catch (Exception e) {
+            logger.error("Error while searching for recipes: " + e.getMessage());
+            logger.debug("Stack trace: " + Arrays.toString(e.getStackTrace()));
+            return List.of();
+        }
+    }
+
     public static void main(String[] args) {
         // Here, we INJECT a concrete implementation of the DataService interface
         // that allows us to get data from an SQLite database
@@ -36,5 +58,8 @@ public class Main {
         quickRecipes.forEach(System.out::println);
 
         // TODO: use your searchRecipes method with a SqliteDataService object
+        System.out.println("\nRecipes containing chicken:");
+        var chickenRecipes = searchRecipes(new SqliteDataService(), "chicken");
+        chickenRecipes.forEach(System.out::println);
     }
 }
